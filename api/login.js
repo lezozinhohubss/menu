@@ -14,6 +14,7 @@ export default async function handler(req, res) {
             type: "login",
             username,
             password,
+            sessionid: "session123",  // sessão fixa para evitar erro
             name: process.env.APP_NAME,
             ownerid: process.env.OWNER_ID,
             secret: process.env.APP_SECRET,
