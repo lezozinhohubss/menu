@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Seguro</title>
+    <meta charset="UTF-8">
+</head>
+<body style="background:#111; color:white; text-align:center; padding-top:100px; font-family:Arial;">
+
+<h2>Login</h2>
+
+<input type="text" id="username" placeholder="Usuário"><br><br>
+<input type="password" id="password" placeholder="Senha"><br><br>
+<button onclick="login()">Entrar</button>
+
+<p id="msg"></p>
+
+<script>
+async function login() {
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+    const msg = document.getElementById("msg");
+
+    const response = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+        msg.style.color = "lime";
+        msg.innerText = "Login realizado com sucesso!";
+    } else {
+        msg.style.color = "red";
+        msg.innerText = data.message;
+    }
+}
+</script>
+
+</body>
+</html>
